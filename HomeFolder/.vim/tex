@@ -1,0 +1,2 @@
+"Set maximum width.
+au BufRead,BufNewFile *.tex set textwidth=79
