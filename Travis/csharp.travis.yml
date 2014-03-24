@@ -1,0 +1,28 @@
+#Mono compilation for Travis
+#Make sure that you have the solution file in the root folder of your repo.
+language: c
+before_install:
+    - sudo apt-get update
+    - sudo apt-get upgrade
+install:
+    - sudo apt-get install wget curl zip
+    - wget http://download.mono-project.com/sources/mono/mono-3.2.8.tar.bz2
+    - tar xf mono-3.2.8.tar.bz2
+    - cd mono-3.2.8.tar.bz2
+    - ./configure --prefix=/usr --sysconfdir=/etc --bindir=/usr/bin --sbindir=/usr/bin --disable-quiet-build --disable-system-aot --disable-static
+    - sudo make
+    - sudo make install
+    - cd ..
+    - rm -r mono-3.2.8 mono-3.2.8.tar.bz2
+script:
+    - mdtool build -t:Build "-c:Release|x86"
+after_success:
+    - echo "----------- Build uploads ------------"
+    - cd */bin/
+    - mkbundle -o travis-bundle --deps -z Release/*.exe
+    - zip -r travis-build.zip .
+    - curl -F "file=@travis-build.zip" https://anonfiles.com/api/v1/upload
+    - cd ..
+after_failure:
+    - echo "Build failure!"
+    - ls -Rlh
