@@ -2,16 +2,21 @@
 #Make sure that you have the solution file in the root folder of your repo.
 language: c
 before_install:
-    - sudo add-apt-repository ppa:v-kukol/mono-testing
+    - echo | sudo add-apt-repository ppa:v-kukol/mono-testing
     - sudo apt-get update
 install:
-    - sudo apt-get install wget curl zip mono
+    - sudo apt-get install wget curl zip mono-devel
 script:
-    - mdtool build -t:Build "-c:Release|x86"
+    - xbuild /p:Configuration=Release
+    - xbuild /p:Configuration=Debug
 after_success:
     - echo "----------- Build uploads ------------"
     - cd */bin/
-    - mkbundle -o travis-bundle --deps -z Release/*.exe
+    - mkdir GNULinuxBundle
+    - cd GNULinuxBundle
+    - mkbundle -o travis-bundle-release --deps -z ../Release/*.exe
+    - mkbundle -o travis-bundle-debug --deps -z ../Debug/*.exe
+    - cd ..
     - zip -r travis-build.zip .
     - curl -F "file=@travis-build.zip" https://anonfiles.com/api/v1/upload
     - cd ..
