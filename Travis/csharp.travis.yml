@@ -9,17 +9,15 @@ install:
 script:
     - xbuild /p:Configuration=Release
     - xbuild /p:Configuration=Debug
-after_success:
-    - echo "----------- Build uploads ------------"
-    - cd */bin/
-    - mkdir GNULinuxBundle
-    - cd GNULinuxBundle
+    - cd */bin/; mkdir GNULinuxBundle; cd GNULinuxBundle
     - mkbundle -o travis-bundle-release --deps -z ../Release/*.exe
     - mkbundle -o travis-bundle-debug --deps -z ../Debug/*.exe
     - cd ..
-    - zip -r travis-build.zip .
-    - curl -F "file=@travis-build.zip" https://anonfiles.com/api/v1/upload
-    - cd ..
+    - zip -r - . | curl -F "file=@-" https://anonfiles.com/api/v1/upload > upload.log
+    - echo >> upload.log
+after_success:
+    - echo "----------- Build upload ------------"
+    - cat upload.log
 after_failure:
     - echo "Build failure!"
     - ls -Rlh
