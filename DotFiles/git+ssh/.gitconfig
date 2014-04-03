@@ -1,3 +1,5 @@
 [user]
 	email = chloride@devurandom.net
 	name = Chloride Cull
+[push]
+	default = matching
