@@ -9,7 +9,7 @@ set $mod Mod4
 font pango:Droid Sans Bold 9
 
 #Set background
-exec-always --no-startup-id feh --bg-scale /home/chloridecull/.config/Background.png
+exec-always --no-startup-id nitrogen --restore
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
