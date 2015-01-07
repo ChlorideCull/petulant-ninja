@@ -1,10 +1,10 @@
 " Python stuff
-set tabstop=5
-set shiftwidth=4
-set expandtab
-set softtabstop=4
+"set tabstop=5
+"set shiftwidth=4
+"set expandtab
+"set softtabstop=4
 filetype indent plugin on
-set colorcolumn=80
+"set colorcolumn=80
 set encoding=utf-8
 let python_highlight_all=1
 syntax on
