@@ -4,4 +4,5 @@ xterm*reverseVideo: on
 xterm*faceName: DejaVu Sans Mono:size=10:antialias=true
 xterm*saveLines: 16384
 xterm*selectToClipboard: true
+xterm*borderWidth: 0
 
