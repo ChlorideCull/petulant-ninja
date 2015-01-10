@@ -1,4 +1,7 @@
 xterm*termName: xterm-256color
-XTerm*locale: true
-XTerm*reverseVideo: on
+xterm*locale: true
+xterm*reverseVideo: on
 xterm*faceName: DejaVu Sans Mono:size=10:antialias=true
+xterm*saveLines: 16384
+xterm*selectToClipboard: true
+
